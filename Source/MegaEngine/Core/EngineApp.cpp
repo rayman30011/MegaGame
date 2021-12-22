@@ -132,7 +132,7 @@ const std::wstring EngineApp::GetSaveGameDirectory(HWND hWnd, const TCHAR* gameA
     {
         if (SHCreateDirectoryEx(hWnd, saveGameDirectory, nullptr) != S_OK)
         {
-            return false;
+            return std::wstring();
         }
     }
 
