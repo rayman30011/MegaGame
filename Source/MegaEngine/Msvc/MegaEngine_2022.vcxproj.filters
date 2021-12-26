@@ -18,6 +18,9 @@
     <Filter Include="Graphics\D3D11">
       <UniqueIdentifier>{9a21098c-c98d-4a64-9168-34bd5716284c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actors">
+      <UniqueIdentifier>{81810812-ad89-48fe-8be9-25cf63cb28c8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MegaEngineStd.h" />
@@ -51,6 +54,15 @@
     <ClInclude Include="..\Graphics\D3D11\Directx11Renderer.h">
       <Filter>Graphics\D3D11</Filter>
     </ClInclude>
+    <ClInclude Include="..\Actors\ActorFactory.h">
+      <Filter>Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Actors\Actor.h">
+      <Filter>Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Actors\ActorComponent.h">
+      <Filter>Actors</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MegaGameStd.cpp" />
@@ -68,6 +80,15 @@
     </ClCompile>
     <ClCompile Include="..\Core\Initialization.cpp">
       <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Actors\ActorFactory.cpp">
+      <Filter>Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Actors\Actor.cpp">
+      <Filter>Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Actors\ActorComponent.cpp">
+      <Filter>Actors</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

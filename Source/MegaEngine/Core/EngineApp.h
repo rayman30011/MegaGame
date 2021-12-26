@@ -27,12 +27,15 @@ public:
 	static void CALLBACK OnD3D11DestroyDevice(void* pUserContext);
 	static void CALLBACK OnD3D11FrameRender(ID3D11Device* pd3dDevice, ID3D11DeviceContext* pd3dImmediateContext, double fTime, float fElapsedTime, void* pUserContext);
 
+	LRESULT MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+
 	std::wstring GetString(const std::wstring id);
 	bool LoadStrings(const std::string& language);
 	int GetExitCode();
 
-
 	void FlashWhileMinimized();
+
+	LRESULT OnClose();
 
 protected:
 	const std::wstring GetSaveGameDirectory(HWND hWnd, const TCHAR* gameAppDirectory);
@@ -42,6 +45,8 @@ private:
 
 	std::map<std::wstring, std::wstring> _textResource;
 	std::shared_ptr<IRenderer> _renderer;
+
+	BaseGameLogic* _game;
 };
 
 

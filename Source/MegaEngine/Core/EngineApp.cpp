@@ -55,6 +55,9 @@ bool EngineApp::InitInstance(HINSTANCE hInstance, LPWSTR cmdLine, HWND hWnd, int
     _renderer->SetBackgroupColor(255, 20, 20, 200);
     _renderer->OnRestore();
 
+    _game = CreateGame();
+    if (!_game) return false;
+
     return true;
 }
 
@@ -87,6 +90,21 @@ void EngineApp::OnD3D11FrameRender(ID3D11Device* pd3dDevice, ID3D11DeviceContext
 {
 }
 
+LRESULT EngineApp::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+    LRESULT result = 0;
+
+    switch (uMsg)
+    {
+    case WM_CLOSE:
+        return GApp->OnClose();
+    default:
+        break;
+    }
+
+    return result;
+}
+
 #pragma endregion
 
 #pragma region WIN
@@ -109,8 +127,54 @@ void EngineApp::FlashWhileMinimized()
 
     if (IsIconic(GetHWnd()))
     {
+        DWORD now = GetTickCount();
+        DWORD then = now;
+        MSG msg;
 
+        FlashWindow(GetHWnd(), true);
+
+        while (true)
+        {
+            if (PeekMessage(&msg, NULL, 0, 0, 0))
+            {
+                if (msg.message != WM_SYSCOMMAND || msg.wParam != SC_CLOSE)
+                {
+                    TranslateMessage(&msg);
+                    DispatchMessage(&msg);
+                }
+
+                if (!IsIconic(GetHWnd()))
+                {
+                    FlashWindow(GetHWnd(), false);
+                    break;
+                }
+            }
+            else
+            {
+                now = GetTickCount();
+                DWORD timeSpan = now > then ? (now - then) : (then - now);
+                if (timeSpan > 1000)
+                {
+                    then = now;
+                    FlashWindow(GetHWnd(), true);
+                }
+            }
+        }
     }
+}
+
+LRESULT EngineApp::OnClose()
+{
+    SAFE_DELETE(_game);
+    DestroyWindow(GetHWnd());
+    // DestroyNetworkEventForwarder()
+    // SAFE_DELETE(m_pBaseSocketManager);
+    // SAFE_DELETE(m_pEventManager);
+    // ScriptExports::Unregister();
+    // LuaStateManager::Destroy();
+    // SAFE_DELETE(m_ResCache);
+
+    return 0;
 }
 
 const std::wstring EngineApp::GetSaveGameDirectory(HWND hWnd, const TCHAR* gameAppDirectory)
