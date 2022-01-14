@@ -36,6 +36,9 @@
     <ClCompile Include="MegaGame.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="MegaGameView.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MegaGame_2022.rc">

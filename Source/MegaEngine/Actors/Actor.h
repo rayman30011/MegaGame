@@ -11,8 +11,7 @@ public:
 	explicit Actor(uint64_t id);
 	~Actor();
 
-	uint64_t GetId() { return _id; }
-
+	uint64_t GetId() const { return _id; }
 
 	bool Init(const xml::XMLElement* el);
 	void PostInit();
@@ -22,19 +21,16 @@ public:
 	template<class TComponent>
 	weak_ptr<TComponent> GetComponent(uint64_t compId)
 	{
-		auto it = _components.find(compId);
+		const auto it = _components.find(compId);
 		if (it != _components.end())
 		{
-			std::shared_ptr<ActorComponent> base(it->second);
+			const std::shared_ptr base(it->second);
 			shared_ptr<TComponent> sub(std::static_pointer_cast<TComponent>(base));
-			weak_ptr<TCompoent> weak(sub);
-
+			weak_ptr<TComponent> weak(sub);
+			
 			return weak;
 		}
-		else
-		{
-			return weak_ptr<TComponent>();
-		}
+		return weak_ptr<TComponent>();
 	}
 
 private:

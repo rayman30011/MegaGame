@@ -1,12 +1,9 @@
-#include "MegaGame.h"
-#include "pch.h"
+#include <pch.h>
 
 #include "MegaGame.h"
 #include "MegaGameView.h"
 
 MegaGameApp MegaGame;
-
-#pragma
 
 INT WINAPI wWinMain(HINSTANCE instance, HINSTANCE prevInstance, LPWSTR cmdLine, int cmdShow)
 {
@@ -21,7 +18,14 @@ HICON MegaGameApp::GetIcon()
 BaseGameLogic* MegaGameApp::CreateGame()
 {
 	BaseGameLogic* game = _NEW MegaGameLogic();
+	game->Init();
+	
 	std::shared_ptr<IGameView> view(_NEW MegaGameHumanView());
 	game->AddGameView(view);
 	return game;
+}
+
+void MegaGameLogic::Init()
+{
+
 }

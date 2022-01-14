@@ -1,3 +1,5 @@
+#include <MegaEngineStd.h>
+
 #include "ActorFactory.h"
 #include "Actor.h"
 #include "ActorComponent.h"
@@ -57,7 +59,7 @@ shared_ptr<ActorComponent> ActorFactory::CreateComponent(xml::XMLElement* el)
 	}
 	else
 	{
-		_ERROR(TEXT("Couldn’t find ActorComponent"));
+		_ERROR(TEXT("Couldnï¿½t find ActorComponent"));
 		return shared_ptr<ActorComponent>();
 	}
 

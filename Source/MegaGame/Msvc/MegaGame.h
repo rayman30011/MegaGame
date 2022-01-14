@@ -7,16 +7,17 @@
 class MegaGameApp : public EngineApp
 {
 public:
-	virtual const TCHAR* GetTitle() const override { return TEXT("MEGA GAME"); }
-	virtual const TCHAR* GetAppDirectory() const override { return TEXT(""); }
-	virtual HICON GetIcon() override;
+	const TCHAR* GetTitle() const override { return TEXT("MEGA GAME"); }
+	const TCHAR* GetAppDirectory() const override { return TEXT(""); }
+	HICON GetIcon() override;
 
-	virtual BaseGameLogic* CreateGame() override;
+	BaseGameLogic* CreateGame() override;
 };
 
 class MegaGameLogic : public BaseGameLogic
 {
-
+public:
+	void Init() override;
 };
 
 extern MegaGameApp MegaGame;

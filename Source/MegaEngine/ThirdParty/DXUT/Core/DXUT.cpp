@@ -2840,12 +2840,6 @@ void WINAPI DXUTRender3DEnvironment()
     if( !pSwapChain )
         return;
 
-    if( DXUTIsRenderingPaused() || !DXUTIsActive() || GetDXUTState().GetRenderingOccluded() )
-    {
-        // Window is minimized/paused/occluded/or not exclusive so yield CPU time to other processes
-        Sleep( 50 );
-    }
-
     // Get the app's time, in seconds. Skip rendering if no time elapsed
     double fTime, fAbsTime; float fElapsedTime;
     DXUTGetGlobalTimer()->GetTimeValues( &fTime, &fAbsTime, &fElapsedTime );

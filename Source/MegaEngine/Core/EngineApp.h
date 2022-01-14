@@ -17,6 +17,7 @@ public:
 
 	HWND GetHWnd();
 	HINSTANCE GetInstance() { return _instance; }
+	__forceinline bool IsQuiting() { return _quiting; }
 
 	bool InitInstance(HINSTANCE hInstance, LPWSTR cmdLine, HWND hWnd, int screenWidth, int screenHeight);
 
@@ -25,7 +26,9 @@ public:
 	static HRESULT CALLBACK OnD3D11ResizedSwapChain(ID3D11Device* pd3dDevice, IDXGISwapChain* pSwapChain, const DXGI_SURFACE_DESC* pBackBufferSurfaceDesc, void* pUserContext);
 	static void CALLBACK OnD3D11ReleasingSwapChain(void* pUserContext);
 	static void CALLBACK OnD3D11DestroyDevice(void* pUserContext);
-	static void CALLBACK OnD3D11FrameRender(ID3D11Device* pd3dDevice, ID3D11DeviceContext* pd3dImmediateContext, double fTime, float fElapsedTime, void* pUserContext);
+	static void CALLBACK OnRender(ID3D11Device* pd3dDevice, ID3D11DeviceContext* pd3dImmediateContext, double fTime, float fElapsedTime, void* pUserContext);
+	bool HasModalDialog();
+	static void CALLBACK OnUpdate(double fTime, float fElapsedTime, void* pUserContext);
 
 	LRESULT MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
@@ -47,6 +50,8 @@ private:
 	std::shared_ptr<IRenderer> _renderer;
 
 	BaseGameLogic* _game;
+
+	bool _quiting;
 };
 
 

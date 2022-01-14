@@ -86,8 +86,32 @@ void EngineApp::OnD3D11DestroyDevice(void* pUserContext)
 {
 }
 
-void EngineApp::OnD3D11FrameRender(ID3D11Device* pd3dDevice, ID3D11DeviceContext* pd3dImmediateContext, double fTime, float fElapsedTime, void* pUserContext)
+void EngineApp::OnRender(ID3D11Device* pd3dDevice, ID3D11DeviceContext* pd3dImmediateContext, double fTime, float fElapsedTime, void* pUserContext)
 {
+    const auto game = GApp->_game;
+    for (const auto view : game->GetViews())
+    {
+        view->OnRender(fTime, fElapsedTime);
+    }
+}
+
+bool EngineApp::HasModalDialog()
+{
+    return false;
+}
+
+void EngineApp::OnUpdate(double fTime, float fElapsedTime, void* pUserContext)
+{
+    if (GApp->HasModalDialog()) return;
+    if (GApp->_quiting) PostMessage(GApp->GetHWnd(), WM_CLOSE, 0, 0);
+
+    if (GApp->_game)
+    {
+        // IEventManager::Get()->Tick(20)
+
+        GApp->_game->OnUpdate((float)fTime, fElapsedTime);
+    }
+    
 }
 
 LRESULT EngineApp::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)

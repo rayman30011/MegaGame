@@ -1,3 +1,5 @@
+#include <MegaEngineStd.h>
+
 #include "Actor.h"
 
 Actor::Actor(uint64_t id) : _id(id)
@@ -10,7 +12,7 @@ Actor::~Actor()
 
 bool Actor::Init(const xml::XMLElement* el)
 {
-	return false;
+	return true;
 }
 
 void Actor::AddComponent(shared_ptr<ActorComponent> component)

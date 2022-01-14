@@ -13,6 +13,16 @@ public:
 	shared_ptr<Actor> Create(const std::string& resource);
 
 protected:
+	template <typename TComponent>
+	void RegisterComponent()
+	{
+		string id = TComponent::ID;
+		_createDelegateMap[id] = []() -> ActorComponent*
+		{
+			return _NEW TComponent();
+		};
+	}
+
 	shared_ptr<ActorComponent> CreateComponent(xml::XMLElement* el);
 
 private:

@@ -7,9 +7,14 @@ class Actor;
 class BaseGameLogic
 {
 public:
-	void AddGameView(std::shared_ptr<IGameView> gameView);
+	virtual void Init() = 0;
 
+	inline auto GetViews() const { return _gameViews; }
+	void AddGameView(std::shared_ptr<IGameView> gameView);
 	virtual weak_ptr<Actor> GetActor(uint64_t actorId);
+	
+	virtual void OnUpdate(float time, float elapsedTime);
+	virtual void OnRender(float time, float elapsedTime);
 
 protected:
 	std::list<std::shared_ptr<IGameView>> _gameViews;
