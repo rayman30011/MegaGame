@@ -60,6 +60,11 @@ namespace xml = tinyxml2;
 #define MEGABYTE KILOBYTE * KILOBYTE
 
 #include "../Core/EngineApp.h"
+#include "../Utilities/Math.h"
+
+typedef DirectX::Math::Vector3 Vector3;
+typedef DirectX::Math::Vector2 Vector2;
+typedef DirectX::Math::Color Color;
 
 extern INT WINAPI MegaEngineMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR cmdLine, int cmdShow);
 

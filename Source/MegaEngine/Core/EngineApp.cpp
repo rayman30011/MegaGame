@@ -51,8 +51,8 @@ bool EngineApp::InitInstance(HINSTANCE hInstance, LPWSTR cmdLine, HWND hWnd, int
 
     DXUTCreateDevice(D3D_FEATURE_LEVEL_10_0, true, screenWidth, screenHeight);
 
-    _renderer = std::shared_ptr<IRenderer>(_NEW DirectX11Renderer());
-    _renderer->SetBackgroupColor(255, 20, 20, 200);
+    _renderer = std::make_shared<DirectX11Renderer>();
+    _renderer->SetBackgroundColor(255, 20, 20, 200);
     _renderer->OnRestore();
 
     _game = CreateGame();

@@ -159,6 +159,8 @@
     <ClInclude Include="..\Core\Interfaces.h" />
     <ClInclude Include="..\Graphics\D3D11\Directx11Renderer.h" />
     <ClInclude Include="..\Graphics\Interfaces.h" />
+    <ClInclude Include="..\Utilities\Math.h" />
+    <ClInclude Include="..\Utilities\Math.inl" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="MegaEngineStd.h" />
     <ClInclude Include="MegaEngine_2022.h" />
@@ -174,6 +176,7 @@
     <ClCompile Include="..\Core\MegaEngine.cpp" />
     <ClCompile Include="..\Core\Initialization.cpp" />
     <ClCompile Include="..\Graphics\D3D11\Directx11Renderer.cpp" />
+    <ClCompile Include="..\Utilities\Math.cpp" />
     <ClCompile Include="MegaGameStd.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MegaEngineStd.h</PrecompiledHeaderFile>

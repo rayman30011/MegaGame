@@ -5,6 +5,7 @@
 #include "../Core/EngineApp.h"
 
 #pragma comment (lib, "DXUT.lib")
+#pragma comment (lib, "DXUTOpt.lib")
 #pragma comment (lib, "tinyxml2.lib")
 
 INT WINAPI MegaEngineMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR cmdLine, int cmdShow)
@@ -22,8 +23,6 @@ INT WINAPI MegaEngineMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR c
     HANDLE hConsoleSTDOUT = CreateFile(TEXT("CONOUT$"), GENERIC_READ | GENERIC_WRITE, FILE_SHARE_WRITE, 0, OPEN_EXISTING, 0, 0);
     SetStdHandle(STD_OUTPUT_HANDLE, hConsoleSTDOUT);*/
 #endif // _DEBUG
-
-    std::cout << "hello";
 
     DXUTSetCallbackD3D11DeviceAcceptable(EngineApp::IsD3D11DeviceAcceptable);
     DXUTSetCallbackD3D11DeviceCreated(EngineApp::OnD3D11CreateDevice);

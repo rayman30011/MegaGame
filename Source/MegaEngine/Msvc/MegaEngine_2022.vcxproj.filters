@@ -21,6 +21,9 @@
     <Filter Include="Actors">
       <UniqueIdentifier>{81810812-ad89-48fe-8be9-25cf63cb28c8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{9cec6142-9a02-4107-95be-5fba89403dd9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MegaEngineStd.h" />
@@ -63,6 +66,9 @@
     <ClInclude Include="..\Actors\ActorComponent.h">
       <Filter>Actors</Filter>
     </ClInclude>
+    <ClInclude Include="..\Utilities\Math.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MegaGameStd.cpp" />
@@ -89,6 +95,9 @@
     </ClCompile>
     <ClCompile Include="..\Actors\ActorComponent.cpp">
       <Filter>Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utilities\Math.cpp">
+      <Filter>Utilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
