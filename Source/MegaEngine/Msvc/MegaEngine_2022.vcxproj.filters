@@ -24,6 +24,9 @@
     <Filter Include="Utilities">
       <UniqueIdentifier>{9cec6142-9a02-4107-95be-5fba89403dd9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ResourceCache">
+      <UniqueIdentifier>{a7a41cfc-2d76-46f1-bebb-7381076d5882}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MegaEngineStd.h" />
@@ -69,6 +72,12 @@
     <ClInclude Include="..\Utilities\Math.h">
       <Filter>Utilities</Filter>
     </ClInclude>
+    <ClInclude Include="..\Utilities\Math.inl">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ResourceCache\ZipFile.h">
+      <Filter>ResourceCache</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MegaGameStd.cpp" />
@@ -98,6 +107,9 @@
     </ClCompile>
     <ClCompile Include="..\Utilities\Math.cpp">
       <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ResourceCache\ZipFile.cpp">
+      <Filter>ResourceCache</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

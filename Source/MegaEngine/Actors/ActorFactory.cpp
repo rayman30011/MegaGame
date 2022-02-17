@@ -59,7 +59,7 @@ shared_ptr<ActorComponent> ActorFactory::CreateComponent(xml::XMLElement* el)
 	}
 	else
 	{
-		_ERROR(TEXT("Couldn�t find ActorComponent"));
+		_ERROR(TEXT("Couldn't find ActorComponent"));
 		return shared_ptr<ActorComponent>();
 	}
 

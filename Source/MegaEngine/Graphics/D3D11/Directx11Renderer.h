@@ -3,13 +3,12 @@
 #include "../Interfaces.h"
 
 #include <DXUTgui.h>
-#include <SDKmisc.h>
 
 class DirectX11Renderer : public IRenderer
 {
 public:
-	static CDXUTDialogResourceManager DialogResourceManager;
-	static CDXUTTextHelper* TextHelper;
+	//static CDXUTDialogResourceManager DialogResourceManager;
+	//static CDXUTTextHelper* TextHelper;
 
 	~DirectX11Renderer();
 	

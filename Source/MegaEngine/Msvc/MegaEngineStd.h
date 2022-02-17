@@ -23,6 +23,7 @@
 #define DXUT_AUTOLIB
 
 #include <DXUT.h>
+#include <SDKmisc.h>
 #include <tinyxml2.h>
 
 using std::shared_ptr;

@@ -7,6 +7,7 @@
 #pragma comment (lib, "DXUT.lib")
 #pragma comment (lib, "DXUTOpt.lib")
 #pragma comment (lib, "tinyxml2.lib")
+#pragma comment (lib, "libz-static.lib")
 
 INT WINAPI MegaEngineMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR cmdLine, int cmdShow)
 {
