@@ -150,7 +150,7 @@ std::optional<int> ZipFile::Find(const std::string& path)
     std::transform(lowerCase.begin(), lowerCase.end(), lowerCase.begin(), (int(*)(int)) std::tolower);
     const auto i = ZipContent.find(lowerCase);
     if (i == ZipContent.end())
-        return nullptr;
+        return {};
 
     return i->second;
 }
