@@ -16,7 +16,7 @@ protected:
 	template <typename TComponent>
 	void RegisterComponent()
 	{
-		string id = TComponent::ID;
+		string id = TComponent::Name;
 		_createDelegateMap[id] = []() -> ActorComponent*
 		{
 			return _NEW TComponent();

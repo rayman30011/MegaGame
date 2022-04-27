@@ -2,6 +2,7 @@
 
 #include "MegaGame.h"
 #include "MegaGameView.h"
+#include <iostream>
 
 MegaGameApp MegaGame;
 
@@ -17,6 +18,8 @@ HICON MegaGameApp::GetIcon()
 
 BaseGameLogic* MegaGameApp::CreateGame()
 {
+	std::cerr << "Log" << std::endl;
+
 	BaseGameLogic* game = _NEW MegaGameLogic();
 	game->Init();
 	

@@ -17,6 +17,7 @@ public:
 	virtual void Inited() {};
 	virtual void Update(int delta) {};
 
+	virtual string GetName() const = 0;
 	virtual uint64_t GetId() const = 0;
 
 private:

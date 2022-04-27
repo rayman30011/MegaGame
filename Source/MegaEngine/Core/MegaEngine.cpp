@@ -17,12 +17,10 @@ INT WINAPI MegaEngineMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR c
 
     AllocConsole();
 
-    /*GETConsole
-
     HANDLE hConsoleSTDIN = CreateFile(TEXT("CONIN$"), GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ, 0, OPEN_EXISTING, 0, 0);
     SetStdHandle(STD_INPUT_HANDLE, hConsoleSTDIN);
     HANDLE hConsoleSTDOUT = CreateFile(TEXT("CONOUT$"), GENERIC_READ | GENERIC_WRITE, FILE_SHARE_WRITE, 0, OPEN_EXISTING, 0, 0);
-    SetStdHandle(STD_OUTPUT_HANDLE, hConsoleSTDOUT);*/
+    SetStdHandle(STD_OUTPUT_HANDLE, hConsoleSTDOUT);
 #endif // _DEBUG
 
     DXUTSetCallbackD3D11DeviceAcceptable(EngineApp::IsD3D11DeviceAcceptable);

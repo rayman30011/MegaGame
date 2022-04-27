@@ -3,9 +3,11 @@
 #include "ActorFactory.h"
 #include "Actor.h"
 #include "ActorComponent.h"
+#include "Components/SampleComponent.h"
 
 ActorFactory::ActorFactory()
 {
+	RegisterComponent<SampleComponent>();
 }
 
 shared_ptr<Actor> ActorFactory::Create(const std::string& resource)

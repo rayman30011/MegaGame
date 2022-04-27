@@ -27,6 +27,9 @@
     <Filter Include="ResourceCache">
       <UniqueIdentifier>{a7a41cfc-2d76-46f1-bebb-7381076d5882}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actors\Components">
+      <UniqueIdentifier>{37e43d14-7b7d-49dd-a873-387a1407743a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MegaEngineStd.h" />
@@ -78,6 +81,12 @@
     <ClInclude Include="..\ResourceCache\ZipFile.h">
       <Filter>ResourceCache</Filter>
     </ClInclude>
+    <ClInclude Include="..\ResourceCache\ResCache.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Actors\Components\SampleComponent.h">
+      <Filter>Actors\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MegaGameStd.cpp" />
@@ -110,6 +119,9 @@
     </ClCompile>
     <ClCompile Include="..\ResourceCache\ZipFile.cpp">
       <Filter>ResourceCache</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Actors\Components\SampleComponent.cpp">
+      <Filter>Actors\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

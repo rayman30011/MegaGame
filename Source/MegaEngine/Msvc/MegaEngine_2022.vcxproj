@@ -154,15 +154,18 @@
     <ClInclude Include="..\Actors\Actor.h" />
     <ClInclude Include="..\Actors\ActorComponent.h" />
     <ClInclude Include="..\Actors\ActorFactory.h" />
+    <ClInclude Include="..\Actors\Components\SampleComponent.h" />
     <ClInclude Include="..\Core\BaseGameLogic.h" />
     <ClInclude Include="..\Core\EngineApp.h" />
     <ClInclude Include="..\Core\Initialization.h" />
     <ClInclude Include="..\Core\Interfaces.h" />
     <ClInclude Include="..\Graphics\D3D11\Directx11Renderer.h" />
     <ClInclude Include="..\Graphics\Interfaces.h" />
+    <ClCompile Include="..\ResourceCache\ResCache.cpp" />
     <ClInclude Include="..\ResourceCache\ZipFile.h" />
     <ClInclude Include="..\Utilities\Math.h" />
     <ClInclude Include="..\Utilities\Math.inl" />
+    <ClInclude Include="..\Utilities\Strings.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="MegaEngineStd.h" />
     <ClInclude Include="MegaEngine_2022.h" />
@@ -173,6 +176,7 @@
     <ClCompile Include="..\Actors\Actor.cpp" />
     <ClCompile Include="..\Actors\ActorComponent.cpp" />
     <ClCompile Include="..\Actors\ActorFactory.cpp" />
+    <ClCompile Include="..\Actors\Components\SampleComponent.cpp" />
     <ClCompile Include="..\Core\BaseGameLogic.cpp" />
     <ClCompile Include="..\Core\EngineApp.cpp" />
     <ClCompile Include="..\Core\MegaEngine.cpp" />
@@ -180,6 +184,7 @@
     <ClCompile Include="..\Graphics\D3D11\Directx11Renderer.cpp" />
     <ClCompile Include="..\ResourceCache\ZipFile.cpp" />
     <ClCompile Include="..\Utilities\Math.cpp" />
+    <ClCompile Include="..\Utilities\Strings.cpp" />
     <ClCompile Include="MegaGameStd.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MegaEngineStd.h</PrecompiledHeaderFile>
