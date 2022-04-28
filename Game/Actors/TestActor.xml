@@ -1,5 +1,0 @@
-<Actor>
-	<TestComponent>
-		<Message>hello from xml</Message>
-	<TestComponent>
-</Actor>

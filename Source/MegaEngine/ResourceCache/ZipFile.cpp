@@ -44,7 +44,7 @@ struct ZipFile::ZipDirHeader
     word    cmntLen;
 };
 
-struct ZipFile::ZipFileHeader
+struct ZipFile::ZipDirFileHeader
 {
     enum
     {
@@ -75,70 +75,77 @@ struct ZipFile::ZipFileHeader
 
 #pragma pack()
 
-bool ZipFile::Init(std::wstring& resFileName)
+bool ZipFile::Init(const std::wstring& resFileName)
 {
-    End();
-
-    _wfopen_s(&_file, resFileName.c_str(), L"rb");
+    _wfopen_s(&_file, resFileName.c_str(), _T("rb"));
     if (!_file)
         return false;
 
-    ZipDirHeader dirHeader;
-    fseek(_file, -(int)sizeof(dirHeader), SEEK_END);
-    long dhOffset = ftell(_file);
-    memset(&dirHeader, 0, sizeof(dirHeader));
-    fread(&dirHeader, sizeof(dirHeader), 1, _file);
+    // Assuming no extra comment at the end, read the whole end record.
+    ZipDirHeader dh;
 
-    if (dirHeader.sig != ZipDirHeader::SIGNATURE)
+    fseek(_file, -(int)sizeof(dh), SEEK_END);
+    long dhOffset = ftell(_file);
+    memset(&dh, 0, sizeof(dh));
+    fread(&dh, sizeof(dh), 1, _file);
+
+    // Check
+    if (dh.sig != ZipDirHeader::SIGNATURE)
         return false;
 
-    fseek(_file, dhOffset - dirHeader.dirSize, SEEK_SET);
-    _dirData = _NEW char[dirHeader.dirSize + dirHeader.nDirEntries * sizeof(_papDir)];
+    // Go to the beginning of the directory.
+    fseek(_file, dhOffset - dh.dirSize, SEEK_SET);
+
+    // Allocate the data buffer, and read the whole thing.
+    _dirData = _NEW char[dh.dirSize + dh.nDirEntries*sizeof(*_papDir)];
     if (!_dirData)
         return false;
+    memset(_dirData, 0, dh.dirSize + dh.nDirEntries * sizeof(*_papDir));
+    fread(_dirData, dh.dirSize, 1, _file);
 
-    memset(_dirData, 0, dirHeader.dirSize + dirHeader.nDirEntries * sizeof(_papDir));
-    fread(_dirData, dirHeader.dirSize, 1, _file);
-
-    char* pfh = _dirData;
-    _papDir = (const ZipFileHeader**)(_dirData + dirHeader.dirSize);
+    // Now process each entry.
+    char *pfh = _dirData;
+    _papDir = (const ZipDirFileHeader **)(_dirData + dh.dirSize);
 
     bool success = true;
 
-    for (int i = 0; i < dirHeader.nDirEntries && success; ++i)
+    for (int i = 0; i < dh.nDirEntries && success; i++)
     {
-        ZipFileHeader& fileHeader = *(ZipFileHeader*)_papDir;
-        _papDir[i] = &fileHeader;
+        ZipDirFileHeader &fh = *(ZipDirFileHeader*)pfh;
 
-        if (fileHeader.sig != ZipFileHeader::SIGNATURE)
+        // Store the address of nth file for quicker access.
+        _papDir[i] = &fh;
+
+        // Check the directory entry integrity.
+        if (fh.sig != ZipDirFileHeader::SIGNATURE)
             success = false;
         else
         {
-            pfh += sizeof fileHeader;
+            pfh += sizeof(fh);
 
-            for (int j = 0; j < fileHeader.fnameLen; j++)
+            // Convert UNIX slashes to DOS backlashes.
+            for (int j = 0; j < fh.fnameLen; j++)
                 if (pfh[j] == '/')
                     pfh[j] = '\\';
 
             char fileName[_MAX_PATH];
-            memcpy(fileName, pfh, fileHeader.fnameLen);
-            fileName[fileHeader.fnameLen]=0;
+            memcpy(fileName, pfh, fh.fnameLen);
+            fileName[fh.fnameLen]=0;
             _strlwr_s(fileName, _MAX_PATH);
             std::string spath = fileName;
             ZipContent[spath] = i;
 
             // Skip name, extra and comment fields.
-            pfh += fileHeader.fnameLen + fileHeader.xtraLen + fileHeader.cmntLen;
+            pfh += fh.fnameLen + fh.xtraLen + fh.cmntLen;
         }
     }
-
     if (!success)
     {
         SAFE_DELETE_ARRAY(_dirData);
     }
     else
     {
-        _numFiles = dirHeader.nDirEntries;
+        _numFiles = dh.nDirEntries;
     }
 
     return success;
@@ -150,7 +157,7 @@ std::optional<int> ZipFile::Find(const std::string& path)
     std::transform(lowerCase.begin(), lowerCase.end(), lowerCase.begin(), (int(*)(int)) std::tolower);
     const auto i = ZipContent.find(lowerCase);
     if (i == ZipContent.end())
-        return {};
+        return std::nullopt;
 
     return i->second;
 }

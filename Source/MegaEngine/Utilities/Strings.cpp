@@ -1,3 +1,4 @@
+#include <MegaEngineStd.h>
 #include "Strings.h"
 
 bool Utilities::Strings::WildcardMatch(const char* pat, const char* str)

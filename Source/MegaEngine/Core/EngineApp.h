@@ -50,6 +50,7 @@ private:
 	std::shared_ptr<IRenderer> _renderer;
 
 	BaseGameLogic* _game;
+	class ResCache* _resCache;
 
 	bool _quiting;
 };

@@ -3,6 +3,8 @@
 #include "Initialization.h"
 #include "../Core/EngineApp.h"
 #include "../Graphics/D3D11/Directx11Renderer.h"
+#include "ResourceCache/ResourceZipFile.h"
+#include "ResourceCache/ResCache.h"
 
 using namespace MegaEngine::Core;
 
@@ -41,6 +43,14 @@ bool EngineApp::InitInstance(HINSTANCE hInstance, LPWSTR cmdLine, HWND hWnd, int
         }
 
         resourceCheck = true;
+    }
+
+    ResourceZipFile zipFile(_T("Assets.zip"));
+    _resCache = _NEW ResCache(50, &zipFile);
+    if (!_resCache->Init())
+    {
+        _ERROR(_T("Failed to initialize resource cache!  Are your paths set up correctly?"));
+        return false;
     }
 
     DXUTInit(true, true, cmdLine, true);
@@ -196,7 +206,7 @@ LRESULT EngineApp::OnClose()
     // SAFE_DELETE(m_pEventManager);
     // ScriptExports::Unregister();
     // LuaStateManager::Destroy();
-    // SAFE_DELETE(m_ResCache);
+    SAFE_DELETE(_resCache);
 
     return 0;
 }

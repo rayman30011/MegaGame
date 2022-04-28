@@ -26,8 +26,6 @@
 #include <SDKmisc.h>
 #include <tinyxml2.h>
 
-#include "Utilities/Strings.h"
-
 using std::shared_ptr;
 using std::weak_ptr;
 using std::string;

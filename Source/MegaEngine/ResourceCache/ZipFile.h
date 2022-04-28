@@ -5,9 +5,9 @@
 class ZipFile
 {
 public:
-    ZipFile();
+    ZipFile() { _numFiles = 0; _file = nullptr; _dirData = nullptr; }
 
-    bool Init(std::wstring &resFileName);
+    bool Init(const std::wstring &resFileName);
     void End();
 
     int GetNumFiles() const { return _numFiles; }
@@ -21,12 +21,12 @@ public:
     std::map<std::string, int> ZipContent;
 private:
     struct ZipDirHeader;
-    struct ZipFileHeader;
+    struct ZipDirFileHeader;
     struct ZipLocalHeader;
 
     FILE* _file;
     char* _dirData;
     int _numFiles;
 
-    const ZipFileHeader **_papDir;
+    const ZipDirFileHeader **_papDir;
 };

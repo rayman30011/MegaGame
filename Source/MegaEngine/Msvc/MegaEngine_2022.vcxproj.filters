@@ -32,14 +32,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MegaEngineStd.h" />
     <ClInclude Include="framework.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="MegaEngine_2022.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="targetver.h">
@@ -75,21 +68,31 @@
     <ClInclude Include="..\Utilities\Math.h">
       <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="..\Utilities\Math.inl">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="..\ResourceCache\ZipFile.h">
       <Filter>ResourceCache</Filter>
-    </ClInclude>
-    <ClInclude Include="..\ResourceCache\ResCache.h">
-      <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="..\Actors\Components\SampleComponent.h">
       <Filter>Actors\Components</Filter>
     </ClInclude>
+    <ClInclude Include="..\Utilities\Strings.h">
+      <Filter>ResourceCache</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ResourceCache\ResourceZipFile.h">
+      <Filter>ResourceCache</Filter>
+    </ClInclude>
+    <ClInclude Include="MegaEngineStd.h" />
+    <ClInclude Include="..\ResourceCache\ResCache.h">
+      <Filter>ResourceCache</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>ResourceCache</Filter>
+    </ClInclude>
+    <ClInclude Include="MegaEngine_2022.h" />
+    <ClInclude Include="..\Utilities\Math.inl">
+      <Filter>Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MegaGameStd.cpp" />
     <ClCompile Include="..\Core\EngineApp.cpp">
       <Filter>Core</Filter>
     </ClCompile>
@@ -123,6 +126,16 @@
     <ClCompile Include="..\Actors\Components\SampleComponent.cpp">
       <Filter>Actors\Components</Filter>
     </ClCompile>
+    <ClCompile Include="..\Utilities\Strings.cpp">
+      <Filter>ResourceCache</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ResourceCache\ResCache.cpp">
+      <Filter>ResourceCache</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ResourceCache\ResourceZipFile.cpp">
+      <Filter>ResourceCache</Filter>
+    </ClCompile>
+    <ClCompile Include="MegaGameStd.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MegaEngine_2022.rc">

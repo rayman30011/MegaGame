@@ -1,7 +1,7 @@
 ﻿#include "MegaEngineStd.h"
 
 #include "ResCache.h"
-#include "Windows.h"
+#include "Utilities/Strings.h"
 
 ResHandler::ResHandler(Resource& resource, char* buffer, size_t size, ResCache* resCache) : _resource(resource)
 {
@@ -57,6 +57,7 @@ bool ResCache::Init()
 
 void ResCache::RegisterLoader(shared_ptr<IResourceLoader> loader)
 {
+    _resourceLoaders.push_front(loader);
 }
 
 shared_ptr<ResHandler> ResCache::GetHandle(Resource* resource)
@@ -72,18 +73,26 @@ shared_ptr<ResHandler> ResCache::GetHandle(Resource* resource)
 
 int ResCache::Preload(const string pattern, void(* progressCallback)(int, bool&))
 {
+    return 0;
 }
 
 void ResCache::Flush()
 {
 }
 
-shared_ptr<ResHandler> ResCache::Find(Resource* resource)
+shared_ptr<ResHandler> ResCache::Find(const Resource* resource)
 {
+    const auto handler = _resources.find(resource->Name);
+    if (handler == _resources.end())
+        return shared_ptr<ResHandler>();
+
+    return handler->second;
 }
 
-const void* ResCache::Update(shared_ptr<ResHandler> handler)
+void ResCache::Update(shared_ptr<ResHandler> handler)
 {
+    _lru.remove(handler);
+    _lru.push_front(handler);
 }
 
 shared_ptr<ResHandler> ResCache::Load(Resource* resource)
@@ -153,14 +162,38 @@ void ResCache::Free(shared_ptr<ResHandler> gonner)
 
 bool ResCache::MakeRoom(size_t size)
 {
+    if (size > _cacheSize)
+        return false;
+
+    while (size > (_cacheSize - _allocated))
+    {
+        if (_lru.empty())
+            return false;
+
+        FreeOneResource();
+    }
+    return true;
 }
 
 char* ResCache::Allocate(size_t size)
 {
+    if (!MakeRoom(size))
+        return nullptr;
+
+    char* mem = _NEW char[size];
+    if (mem)
+        _allocated += size;
+
+    return mem;
 }
 
 void ResCache::FreeOneResource()
 {
+    const auto end = _lru.end();
+    shared_ptr<ResHandler> handler = *end;
+
+    _lru.pop_back();
+    _resources.erase(handler->_resource.Name);
 }
 
 void ResCache::MemoryHasBeenFreed(size_t size)

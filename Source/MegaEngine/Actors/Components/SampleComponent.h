@@ -12,5 +12,5 @@ public:
 	virtual string GetName() const override { return Name; }
 	virtual uint64_t GetId() const override { return 1; }
 	
-	virtual bool SampleComponent::Init(const xml::XMLElement* el) override;
+	virtual bool Init(const xml::XMLElement* el) override;
 };

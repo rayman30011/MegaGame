@@ -1,6 +1,6 @@
-class ResCache;
+#pragma once
 
-#include "ZipFile.h"
+class ResCache;
 
 class IResourceExtraData
 {
@@ -54,6 +54,7 @@ public:
 
 class ResCache
 {
+    friend class ResHandler;
 public:
     ResCache(const size_t sizeMb, IResourceFile* resFile);
     ~ResCache();
@@ -75,8 +76,8 @@ protected:
     size_t _cacheSize;
     size_t _allocated;
 
-    shared_ptr<ResHandler> Find(Resource* resource);
-    const void* Update(shared_ptr<ResHandler> handler);
+    shared_ptr<ResHandler> Find(const Resource* resource);
+    void Update(shared_ptr<ResHandler> handler);
     shared_ptr<ResHandler> Load(Resource* resource);
     void Free(shared_ptr<ResHandler> gonner);
 
