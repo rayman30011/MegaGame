@@ -18,6 +18,7 @@ public:
 	HWND GetHWnd();
 	HINSTANCE GetInstance() { return _instance; }
 	__forceinline bool IsQuiting() { return _quiting; }
+	class ResCache* GetResourceCahce() { return _resCache; }
 
 	bool InitInstance(HINSTANCE hInstance, LPWSTR cmdLine, HWND hWnd, int screenWidth, int screenHeight);
 

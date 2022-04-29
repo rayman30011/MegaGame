@@ -73,7 +73,26 @@ shared_ptr<ResHandler> ResCache::GetHandle(Resource* resource)
 
 int ResCache::Preload(const string pattern, void(* progressCallback)(int, bool&))
 {
-    return 0;
+    if (_file == nullptr)
+        return 0;
+
+    int numFiles = _file->GetNumResources();
+    int loaded = 0;
+    bool cancel = false;
+    for (int i = 0; i < numFiles; ++i)
+    {
+        Resource resource(_file->GetResourceName(i));
+        if (Utilities::Strings::WildcardMatch(pattern.c_str(), resource.Name.c_str()))
+        {
+            shared_ptr<ResHandler> handle = GApp->GetResourceCahce()->GetHandle(&resource);
+            ++loaded;
+        }
+
+        if (progressCallback != nullptr)
+            progressCallback(i / 100 / numFiles, cancel);
+    }
+    
+    return loaded;
 }
 
 void ResCache::Flush()

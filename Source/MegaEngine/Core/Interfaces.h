@@ -27,3 +27,31 @@ public:
     virtual int GetNumResources() const = 0;
     virtual std::string GetResourceName(int num) const = 0;
 };
+
+class FVector2;
+
+class IKeyboardHandler
+{
+public:
+    virtual bool OnKeyDown(uint32_t code);
+    virtual bool OnKeyUp(uint32_t code);
+};
+
+class IPointerHandler
+{
+public:
+    virtual bool OnPointerMove(const FVector2& mousePos) = 0;
+    virtual bool OnPointerButtonDown(const FVector2& mousePos, const std::string& buttonName) = 0;
+    virtual bool OnPointerButtonUp(const FVector2& mousePos, const std::string& buttonName) = 0;
+    virtual int GetPointerRadius(const FVector2& mousePos, const std::string& buttonName) = 0;
+};
+
+class IJoystickHandler
+{
+public:
+    virtual bool OnTrigger(const std::string& buttonName, int pressure) = 0;
+    virtual bool OnButtonDown(const std::string& buttonName, int pressure) = 0;
+    virtual bool OnButtonUp(const std::string& buttonName) = 0;
+    virtual bool OnDirectionalPad(const std::string& direction) = 0;
+    virtual bool OnThumbstick(const std::string& stickName, float x, float y) = 0;
+};
