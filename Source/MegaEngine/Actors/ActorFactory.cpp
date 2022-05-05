@@ -4,6 +4,7 @@
 #include "Actor.h"
 #include "ActorComponent.h"
 #include "Components/SampleComponent.h"
+#include "ResourceCache/XmlResourceLoader.h"
 
 ActorFactory::ActorFactory()
 {
@@ -12,15 +13,12 @@ ActorFactory::ActorFactory()
 
 shared_ptr<Actor> ActorFactory::Create(const std::string& resource)
 {
-	xml::XMLDocument doc;
-	const auto error = doc.LoadFile(resource.c_str());
-	if (error != xml::XMLError::XML_SUCCESS)
+	const auto root = XmlResourceLoader::LoadAndReturnRoot(resource.c_str());
+	if (!root)
 	{
 		_ERROR(TEXT("Resource are missing"));
 		return shared_ptr<Actor>();
 	}
-
-	const auto root = doc.RootElement();
 
 	shared_ptr<Actor> actor(_NEW Actor(GetNextActorId()));
 	if (!actor->Init(root))

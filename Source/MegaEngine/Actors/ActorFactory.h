@@ -1,5 +1,4 @@
 #pragma once
-#include <MegaEngineStd.h>
 
 class ActorComponent;
 class Actor;

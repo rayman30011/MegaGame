@@ -1,5 +1,1 @@
-<Actor>
-    <SampleComponent>
-
-    </SampleComponent>
-</Actor>
+<Actor><SampleComponent Title="World" /></Actor>

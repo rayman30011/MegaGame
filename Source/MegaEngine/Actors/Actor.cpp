@@ -2,6 +2,8 @@
 
 #include "Actor.h"
 
+#include "ActorComponent.h"
+
 Actor::Actor(uint64_t id) : _id(id)
 {
 }
@@ -27,6 +29,10 @@ void Actor::Destroy()
 {
 }
 
-void Actor::Update()
+void Actor::Update(float delta) const
 {
+	for (auto component : _components)
+	{
+		component.second->Update(delta);
+	}
 }

@@ -1,5 +1,4 @@
 #pragma once
-#include <MegaEngineStd.h>
 
 class ActorComponent;
 
@@ -16,7 +15,7 @@ public:
 	bool Init(const xml::XMLElement* el);
 	void PostInit();
 	void Destroy();
-	void Update();
+	void Update(float delta) const;
 
 	template<class TComponent>
 	weak_ptr<TComponent> GetComponent(uint64_t compId)

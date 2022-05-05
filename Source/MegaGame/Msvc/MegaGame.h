@@ -17,7 +17,7 @@ public:
 class MegaGameLogic : public BaseGameLogic
 {
 public:
-	void Init() override;
+	bool Init() override;
 };
 
 extern MegaGameApp MegaGame;

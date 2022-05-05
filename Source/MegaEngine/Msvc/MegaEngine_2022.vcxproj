@@ -162,6 +162,7 @@
     <ClInclude Include="..\Graphics\D3D11\Directx11Renderer.h" />
     <ClInclude Include="..\Graphics\Interfaces.h" />
     <ClCompile Include="..\ResourceCache\ResCache.cpp" />
+    <ClInclude Include="..\ResourceCache\XmlResourceLoader.h" />
     <ClInclude Include="..\ResourceCache\ZipFile.h" />
     <ClInclude Include="..\Utilities\Math.h" />
     <ClInclude Include="..\Utilities\Math.inl" />
@@ -205,7 +206,7 @@
     <ClInclude Include="..\ResourceCache\ResourceZipFile.h" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Update="..\ResourceCache" />
+    <ClCompile Include="..\ResourceCache\XmlResourceLoader.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

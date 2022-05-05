@@ -5,6 +5,7 @@
 #include "../Graphics/D3D11/Directx11Renderer.h"
 #include "ResourceCache/ResourceZipFile.h"
 #include "ResourceCache/ResCache.h"
+#include "ResourceCache/XmlResourceLoader.h"
 
 using namespace MegaEngine::Core;
 
@@ -52,6 +53,12 @@ bool EngineApp::InitInstance(HINSTANCE hInstance, LPWSTR cmdLine, HWND hWnd, int
         _ERROR(_T("Failed to initialize resource cache!  Are your paths set up correctly?"));
         return false;
     }
+
+    extern shared_ptr<IResourceLoader> CreateXmlResourceLoader();
+
+    _resCache->RegisterLoader(CreateXmlResourceLoader());
+
+    
 
     DXUTInit(true, true, cmdLine, true);
     DXUTCreateWindow(GetTitle(), hInstance, GetIcon());
@@ -256,14 +263,13 @@ bool EngineApp::LoadStrings(const std::string& language)
 {
     std::string languageFile = "Strings\\" + language + ".xml";
     xml::XMLDocument doc;
-    const auto error = doc.LoadFile(languageFile.c_str());
-    if (error != xml::XMLError::XML_SUCCESS)
+    const auto root = XmlResourceLoader::LoadAndReturnRoot(languageFile.c_str());
+    if (!root)
     {
         _ERROR(TEXT("Strings are missing"));
         return false;
     }
-
-    const auto root = doc.RootElement();
+    
     for (auto el = root->FirstChildElement(); el; el = el->NextSiblingElement())
     {
         std::string key = el->Attribute("id");

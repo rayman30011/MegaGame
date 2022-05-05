@@ -4,6 +4,9 @@
 #include "MegaGameView.h"
 #include <iostream>
 
+#include "../../MegaEngine/Actors/Actor.h"
+#include "../../MegaEngine/Actors/ActorFactory.h"
+
 MegaGameApp MegaGame;
 
 INT WINAPI wWinMain(HINSTANCE instance, HINSTANCE prevInstance, LPWSTR cmdLine, int cmdShow)
@@ -28,7 +31,10 @@ BaseGameLogic* MegaGameApp::CreateGame()
 	return game;
 }
 
-void MegaGameLogic::Init()
+bool MegaGameLogic::Init()
 {
+	const auto actor = _actorFactory->Create("Actors\\Sample.xml");
+	_actors[actor->GetId()] = actor;
 
+	return true;
 }

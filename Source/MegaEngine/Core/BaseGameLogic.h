@@ -2,12 +2,12 @@
 #include "Interfaces.h"
 
 class Actor;
-
+class ActorFactory;
 
 class BaseGameLogic
 {
 public:
-	virtual void Init() = 0;
+	virtual bool Init();
 
 	inline auto GetViews() const { return _gameViews; }
 	void AddGameView(std::shared_ptr<IGameView> gameView);
@@ -17,8 +17,11 @@ public:
 	virtual void OnRender(float time, float elapsedTime);
 
 protected:
+	virtual ActorFactory* CreateActorFactory();
+	
+protected:
 	std::list<std::shared_ptr<IGameView>> _gameViews;
+	ActorFactory* _actorFactory = nullptr;
 
-private:
 	std::map<uint64_t, shared_ptr<Actor>> _actors;
 };

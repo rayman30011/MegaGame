@@ -9,8 +9,12 @@ public:
 
 	static ActorComponent* Create();
 	
-	virtual string GetName() const override { return Name; }
-	virtual uint64_t GetId() const override { return 1; }
+	string GetName() const override { return Name; }
+	uint64_t GetId() const override { return 1; }
 	
-	virtual bool Init(const xml::XMLElement* el) override;
+	bool Init(const xml::XMLElement* el) override;
+	void Update(int delta) override;
+	
+private:
+	string _title;
 };

@@ -1,4 +1,5 @@
 #pragma once
+#include "../Utilities/Math.h"
 
 class IGameView
 {
@@ -28,8 +29,6 @@ public:
     virtual std::string GetResourceName(int num) const = 0;
 };
 
-class FVector2;
-
 class IKeyboardHandler
 {
 public:
@@ -40,10 +39,10 @@ public:
 class IPointerHandler
 {
 public:
-    virtual bool OnPointerMove(const FVector2& mousePos) = 0;
-    virtual bool OnPointerButtonDown(const FVector2& mousePos, const std::string& buttonName) = 0;
-    virtual bool OnPointerButtonUp(const FVector2& mousePos, const std::string& buttonName) = 0;
-    virtual int GetPointerRadius(const FVector2& mousePos, const std::string& buttonName) = 0;
+    virtual bool OnPointerMove(const DirectX::Math::Vector2& mousePos) = 0;
+    virtual bool OnPointerButtonDown(const DirectX::Math::Vector2& mousePos, const std::string& buttonName) = 0;
+    virtual bool OnPointerButtonUp(const DirectX::Math::Vector2& mousePos, const std::string& buttonName) = 0;
+    virtual int GetPointerRadius(const DirectX::Math::Vector2& mousePos, const std::string& buttonName) = 0;
 };
 
 class IJoystickHandler
