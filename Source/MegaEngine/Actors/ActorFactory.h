@@ -25,7 +25,7 @@ protected:
 	shared_ptr<ActorComponent> CreateComponent(xml::XMLElement* el);
 
 private:
-	uint64_t GetNextActorId() { ++_lastActorId; return _lastActorId; }
+	uint64_t GetNextActorId();
 	uint64_t _lastActorId = 0;
 
 protected:

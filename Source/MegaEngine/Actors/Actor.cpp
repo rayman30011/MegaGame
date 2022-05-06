@@ -19,6 +19,7 @@ bool Actor::Init(const xml::XMLElement* el)
 
 void Actor::AddComponent(shared_ptr<ActorComponent> component)
 {
+	_components.insert(std::make_pair(component->GetId(), component));
 }
 
 void Actor::PostInit()

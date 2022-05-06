@@ -33,6 +33,8 @@ BaseGameLogic* MegaGameApp::CreateGame()
 
 bool MegaGameLogic::Init()
 {
+	BaseGameLogic::Init();
+	
 	const auto actor = _actorFactory->Create("Actors\\Sample.xml");
 	_actors[actor->GetId()] = actor;
 

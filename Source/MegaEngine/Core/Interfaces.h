@@ -15,6 +15,7 @@ class IResourceLoader
 public:
     virtual std::string GetPattern() = 0;
     virtual bool UseRawFile() = 0;
+    virtual bool AddNullZero() { return false; }
     virtual size_t GetLoadedResourceSize(char* rawBuffer, size_t rawSize) = 0;
     virtual bool LoadResource(char* rawBuffer, uint32_t rawSize, shared_ptr<ResHandler> handle) = 0;
 };

@@ -20,7 +20,8 @@ shared_ptr<Actor> ActorFactory::Create(const std::string& resource)
 		return shared_ptr<Actor>();
 	}
 
-	shared_ptr<Actor> actor(_NEW Actor(GetNextActorId()));
+	const auto actorId = GetNextActorId();
+	shared_ptr<Actor> actor(_NEW Actor(actorId));
 	if (!actor->Init(root))
 	{
 		_ERROR(TEXT("FAILED Initialize"));
@@ -72,4 +73,10 @@ shared_ptr<ActorComponent> ActorFactory::CreateComponent(xml::XMLElement* el)
 	}
 
 	return component;
+}
+
+uint64_t ActorFactory::GetNextActorId()
+{
+	++_lastActorId;
+	return _lastActorId;
 }

@@ -8,7 +8,7 @@ class XmlResourceExtraData : public IResourceExtraData
 {
 public:
     std::string ToString() override { return "XmlResourceExtraData"; }
-    void ParseXml(const char* rawBuffer);
+    bool ParseXml(const char* rawBuffer, size_t rawSize);
     xml::XMLElement* GetRoot() { return _document.RootElement(); }
 
 private:
@@ -20,6 +20,7 @@ class XmlResourceLoader : public IResourceLoader
 public:
     std::string GetPattern() override {return "*.xml";}
     bool UseRawFile() override { return false; }
+    bool AddNullZero() override { return true; }
     size_t GetLoadedResourceSize(char* rawBuffer, size_t rawSize) override { return rawSize; }
     bool LoadResource(char* rawBuffer, size_t rawSize, shared_ptr<ResHandler> handle) override;
 

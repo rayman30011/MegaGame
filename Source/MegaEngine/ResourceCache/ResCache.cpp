@@ -136,7 +136,8 @@ shared_ptr<ResHandler> ResCache::Load(Resource* resource)
     }
 
     size_t rawSize = _file->GetRawResourceSize(*resource);
-    char* rawBuffer = loader->UseRawFile() ? Allocate(rawSize) : _NEW char[rawSize];
+    size_t alloc = rawSize + (loader->AddNullZero() ? 1 : 0);
+    char* rawBuffer = loader->UseRawFile() ? Allocate(alloc) : _NEW char[alloc];
 
     if (rawBuffer == nullptr)
         return shared_ptr<ResHandler>();

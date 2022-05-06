@@ -2,14 +2,13 @@
 
 #include "XmlResourceLoader.h"
 
-void XmlResourceExtraData::ParseXml(const char* rawBuffer)
+bool XmlResourceExtraData::ParseXml(const char* rawBuffer, size_t rawSize)
 {
-    const string str = rawBuffer;
-    const auto result = _document.Parse(str.c_str());
+    const auto result = _document.Parse(rawBuffer, rawSize);
     if (result != xml::XML_SUCCESS)
-    {
-        int a = 5;
-    }
+        return false;
+
+    return true;
 }
 
 bool XmlResourceLoader::LoadResource(char* rawBuffer, size_t rawSize, shared_ptr<ResHandler> handle)
@@ -17,7 +16,8 @@ bool XmlResourceLoader::LoadResource(char* rawBuffer, size_t rawSize, shared_ptr
     if (rawSize <= 0) return false;
 
     const auto extra = std::make_shared<XmlResourceExtraData>();
-    extra->ParseXml(rawBuffer);
+    if (!extra->ParseXml(rawBuffer, rawSize))
+        return false;
 
     handle->SetExtra(extra);
 
