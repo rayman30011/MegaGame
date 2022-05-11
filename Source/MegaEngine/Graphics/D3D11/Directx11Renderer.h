@@ -2,18 +2,18 @@
 
 #include "../Interfaces.h"
 
-#include <DXUTgui.h>
-
 class DirectX11Renderer : public IRenderer
 {
 public:
-	//static CDXUTDialogResourceManager DialogResourceManager;
-	//static CDXUTTextHelper* TextHelper;
+	CDXUTTextHelper* TextHelper;
 
 	~DirectX11Renderer();
 	
 	void SetBackgroundColor(int r, int g, int b, int a) override;
-	void OnRestore() override;
-	void PreRender();
-	void PostRender();
+	HRESULT OnRestore() override;
+	bool PreRender() override;
+	bool PostRender() override;
+
+private:
+	float _bgColor[4] = {0.f};
 };

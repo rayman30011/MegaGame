@@ -2,9 +2,10 @@
 
 #include "Directx11Renderer.h"
 
+
 DirectX11Renderer::~DirectX11Renderer()
 {
-	//SAFE_DELETE(TextHelper);
+	SAFE_DELETE(TextHelper);
 }
 
 void DirectX11Renderer::SetBackgroundColor(int r, int g, int b, int a)
@@ -12,16 +13,18 @@ void DirectX11Renderer::SetBackgroundColor(int r, int g, int b, int a)
 	
 }
 
-void DirectX11Renderer::OnRestore()
+HRESULT DirectX11Renderer::OnRestore()
 {
-	//TextHelper = _NEW CDXUTTextHelper(DXUTGetD3D11Device(), DXUTGetD3D11DeviceContext(), &DialogResourceManager, 15);
+	SAFE_DELETE(TextHelper);
+	TextHelper = _NEW CDXUTTextHelper(DXUTGetD3D11Device(), DXUTGetD3D11DeviceContext(), &g_DialogResourceManager, 15);
+	return S_OK;
 }
 
-void DirectX11Renderer::PreRender()
+bool DirectX11Renderer::PreRender()
 {
 	
 }
 
-void DirectX11Renderer::PostRender()
+bool DirectX11Renderer::PostRender()
 {
 }

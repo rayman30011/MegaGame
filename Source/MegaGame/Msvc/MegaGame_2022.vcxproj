@@ -75,7 +75,7 @@
     <OutDir>$(SolutionDir)..\..\Lib\$(PlatformName)$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
     <IncludePath>$(ProjectDir)..;$(ProjectDir);$(ProjectDir)..\..\MegaEngine\ThirdParty\DXUT\Core;$(ProjectDir)..\..\MegaEngine\ThirdParty\DXUT\Optional;$(ProjectDir)..\..\MegaEngine\ThirdParty\tinyxml2;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)..\..\Lib\$(PlatformName)$(Configuration);$(SolutionDir)..\..\Lib\;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(DXSDK_DIR)Lib\x86;$(VCInstallDir)PlatformSDK\lib;$(LibraryPath);$(SolutionDir)..\..\Lib\$(PlatformName)$(Configuration);$(SolutionDir)..\..\Lib\</LibraryPath>
     <TargetName>$(ProjectName)$(PlatformName)$(Configuration)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -102,6 +102,7 @@
       <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;MegaEngine_2022.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>libcmtd.lib</IgnoreSpecificDefaultLibraries>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\..\Lib\$(PlatformName)$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

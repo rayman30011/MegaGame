@@ -164,6 +164,9 @@
     <ClCompile Include="..\ResourceCache\ResCache.cpp" />
     <ClInclude Include="..\ResourceCache\XmlResourceLoader.h" />
     <ClInclude Include="..\ResourceCache\ZipFile.h" />
+    <ClInclude Include="..\UI\HumanView.h" />
+    <ClInclude Include="..\UI\MessageBox.h" />
+    <ClInclude Include="..\UI\UserInterface.h" />
     <ClInclude Include="..\Utilities\Math.h" />
     <ClInclude Include="..\Utilities\Math.inl" />
     <ClInclude Include="..\Utilities\Strings.h" />
@@ -185,6 +188,8 @@
     <ClCompile Include="..\Graphics\D3D11\Directx11Renderer.cpp" />
     <ClCompile Include="..\ResourceCache\ResourceZipFile.cpp" />
     <ClCompile Include="..\ResourceCache\ZipFile.cpp" />
+    <ClCompile Include="..\UI\HumanView.cpp" />
+    <ClCompile Include="..\UI\MessageBox.cpp" />
     <ClCompile Include="..\Utilities\Math.cpp" />
     <ClCompile Include="..\Utilities\Strings.cpp" />
     <ClCompile Include="MegaGameStd.cpp">
@@ -207,6 +212,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\ResourceCache\XmlResourceLoader.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Update="..\ResourceCache" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

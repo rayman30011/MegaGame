@@ -24,13 +24,27 @@
 
 #include <DXUT.h>
 #include <SDKmisc.h>
+#include <DXUTgui.h>
+
 #include <tinyxml2.h>
+
+
+CDXUTDialogResourceManager g_DialogResourceManager;
 
 using std::shared_ptr;
 using std::weak_ptr;
 using std::string;
 
 namespace xml = tinyxml2;
+
+struct AppMsg
+{
+    HWND HWnd;
+    UINT UMsg;
+    WPARAM WParam;
+    LPARAM LParam;
+};
+
 
 #ifndef _NEW
 #ifdef _DEBUG
@@ -66,6 +80,7 @@ namespace xml = tinyxml2;
 typedef DirectX::Math::Vector3 FVector3;
 typedef DirectX::Math::Vector2 FVector2;
 typedef DirectX::Math::Color FColor;
+
 
 extern INT WINAPI MegaEngineMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR cmdLine, int cmdShow);
 

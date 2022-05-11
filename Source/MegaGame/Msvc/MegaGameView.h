@@ -1,9 +1,10 @@
 #pragma once
 
+#include "../../MegaEngine/UI/HumanView.h"
 #include "../MegaEngine/Core/Interfaces.h"
 
-class MegaGameHumanView : public IGameView
+class MegaGameHumanView : public HumanView
 {
 public:
-    void OnRender(float time, float elapsedTime) override;
+    HRESULT OnRender(float time, float elapsedTime) override;
 };

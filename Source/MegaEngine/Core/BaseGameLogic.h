@@ -6,6 +6,7 @@ class ActorFactory;
 
 class BaseGameLogic
 {
+	friend class EngineApp;
 public:
 	virtual bool Init();
 

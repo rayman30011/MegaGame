@@ -84,7 +84,7 @@ int ResCache::Preload(const string pattern, void(* progressCallback)(int, bool&)
         Resource resource(_file->GetResourceName(i));
         if (Utilities::Strings::WildcardMatch(pattern.c_str(), resource.Name.c_str()))
         {
-            shared_ptr<ResHandler> handle = GApp->GetResourceCahce()->GetHandle(&resource);
+            shared_ptr<ResHandler> handle = GApp->GetResourceCache()->GetHandle(&resource);
             ++loaded;
         }
 

@@ -1,10 +1,56 @@
 #pragma once
 #include "../Utilities/Math.h"
 
+struct AppMsg;
+
+template<class T>
+struct SortBy_SharedPtr_Content
+{
+    bool operator()(const shared_ptr<T> &lhs, const shared_ptr<T> &rhs) const
+    { return *lhs < *rhs; }
+};
+
+class IScreenElement
+{
+public:
+    virtual HRESULT OnRestore() = 0;
+    virtual HRESULT OnLostDevice() = 0;
+    virtual HRESULT OnRender(double fTime, float fElapsedTime) = 0;
+    virtual void OnUpdate(int deltaMilliseconds) = 0;
+
+    virtual int GetZOrder() const = 0;
+    virtual void SetZOrder(int const zOrder) = 0;
+    virtual bool IsVisible() const = 0;
+    virtual void SetVisible(bool visible) = 0;
+
+    virtual LRESULT CALLBACK OnMsgProc(AppMsg msg)=0;
+
+    virtual ~IScreenElement() { };
+    virtual bool operator <(IScreenElement const& other) const { return GetZOrder() < other.GetZOrder(); }
+};
+
+enum class GameViewType
+{
+    Human,
+    Remote,
+    AI,
+    Recorder,
+    Other
+};
+
+typedef int GameViewId;
+
 class IGameView
 {
 public:
-    virtual void OnRender(float time, float elapsedTime) = 0;
+    virtual ~IGameView() = default;
+    virtual HRESULT OnRender(float time, float elapsedTime) = 0;
+    virtual HRESULT OnRestore() = 0;
+    virtual HRESULT OnLostDevice() = 0;
+    virtual GameViewType GetType() = 0;
+    virtual GameViewId GetId() = 0;
+    virtual LRESULT CALLBACK OnMsgProc(AppMsg msg) = 0;
+    virtual void OnUpdate(int deltaMilliseconds) = 0;
 };
 
 class Resource;

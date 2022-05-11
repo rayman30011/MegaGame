@@ -16,9 +16,12 @@ public:
 	virtual BaseGameLogic* CreateGame() = 0;
 
 	HWND GetHWnd();
-	HINSTANCE GetInstance() { return _instance; }
-	__forceinline bool IsQuiting() { return _quiting; }
-	class ResCache* GetResourceCahce() { return _resCache; }
+	HINSTANCE GetInstance() const { return _instance; }
+	__forceinline bool IsQuiting() const { return _quiting; }
+	class ResCache* GetResourceCache() const { return _resCache; }
+	shared_ptr<IRenderer> GetRenderer() const { return _renderer; }
+	int ScreenWidth() const { return _screenWidth; }
+	int ScreenHeight() const { return _screenHeight; }
 
 	bool InitInstance(HINSTANCE hInstance, LPWSTR cmdLine, HWND hWnd, int screenWidth, int screenHeight);
 
@@ -41,8 +44,11 @@ public:
 
 	LRESULT OnClose();
 
+	int Modal(shared_ptr<IScreenElement> modalScreen, int defaultAnswer);
+
 protected:
 	const std::wstring GetSaveGameDirectory(HWND hWnd, const TCHAR* gameAppDirectory);
+	int PumpUntilMessage(UINT msgEnd, WPARAM* pWParam, LPARAM* pLParam);
 
 private:
 	HINSTANCE _instance;
@@ -51,9 +57,15 @@ private:
 	std::shared_ptr<IRenderer> _renderer;
 
 	BaseGameLogic* _game;
-	class ResCache* _resCache;
+	ResCache* _resCache;
 
 	bool _quiting;
+
+	int _screenWidth;
+	int _screenHeight;
+	
+protected:
+	int _hasModalDialog;
 };
 
 

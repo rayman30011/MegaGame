@@ -29,7 +29,7 @@ shared_ptr<IResourceLoader> CreateXmlResourceLoader() { return std::make_shared<
 xml::XMLElement* XmlResourceLoader::LoadAndReturnRoot(const char* resourceString)
 {
     Resource resource(resourceString);
-    const auto handler = GApp->GetResourceCahce()->GetHandle(&resource);
+    const auto handler = GApp->GetResourceCache()->GetHandle(&resource);
     const auto extraData = std::static_pointer_cast<XmlResourceExtraData>(handler->GetExtra());
     return extraData->GetRoot();
 }

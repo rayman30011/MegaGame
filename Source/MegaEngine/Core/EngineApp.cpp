@@ -6,6 +6,8 @@
 #include "ResourceCache/ResourceZipFile.h"
 #include "ResourceCache/ResCache.h"
 #include "ResourceCache/XmlResourceLoader.h"
+#include "UI/HumanView.h"
+#include "UI/UserInterface.h"
 
 using namespace MegaEngine::Core;
 
@@ -23,6 +25,9 @@ bool EngineApp::InitInstance(HINSTANCE hInstance, LPWSTR cmdLine, HWND hWnd, int
     if (!IsOnlyInstance(GetTitle()))
         return false;
 #endif
+
+    _screenHeight = screenHeight;
+    _screenWidth = screenWidth;
 
     SetCursor(NULL);
 
@@ -139,6 +144,35 @@ LRESULT EngineApp::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     {
     case WM_CLOSE:
         return GApp->OnClose();
+    case WM_KEYDOWN:
+    case WM_KEYUP:
+    case WM_MOUSEMOVE:
+    case WM_LBUTTONUP:
+    case WM_LBUTTONDOWN:
+    case WM_RBUTTONUP:
+    case WM_RBUTTONDOWN:
+    // case MM_JOY1BUTTONDOWN:
+    // case MM_JOY1BUTTONUP:
+    // case MM_JOY1MOVE:
+    // case MM_JOY1ZMOVE:
+    // case MM_JOY2BUTTONDOWN:
+    // case MM_JOY2BUTTONUP:
+    // case MM_JOY2MOVE:
+    // case MM_JOY2ZMOVE:
+        {
+            AppMsg msg;
+            msg.HWnd = hWnd;
+            msg.UMsg = uMsg;
+            msg.LParam = lParam;
+            msg.WParam = wParam;
+
+            for (const auto& view : _game->_gameViews)
+            {
+                if (view->OnMsgProc(msg))
+                    return true;
+            }
+        }
+        break;
     default:
         break;
     }
@@ -218,6 +252,55 @@ LRESULT EngineApp::OnClose()
     return 0;
 }
 
+int EngineApp::Modal(shared_ptr<IScreenElement> modalScreen, int defaultAnswer)
+{
+    HumanView* humanView = nullptr;
+    for (const auto& view : _game->GetViews())
+    {
+        if (view->GetType() == GameViewType::Human)
+        {
+            const auto gameView = view;
+            humanView = static_cast<HumanView*>(&*gameView);
+            break;
+        }
+    }
+
+    if (!humanView)
+    {
+        return defaultAnswer;
+    }
+
+    assert(GetHWnd() != nullptr && _T("Main Window is NULL"));
+    if ((GetHWnd() != nullptr) && IsIconic(GetHWnd()))
+        FlashWhileMinimized();
+
+    if (_hasModalDialog & 0x10000000)
+    {
+        assert(0 && "Too Many nested dialogs!");
+        return defaultAnswer;
+    }
+
+    _hasModalDialog <<= 1;
+    _hasModalDialog |= 1;
+
+    humanView->PushElement(modalScreen);
+
+    LPARAM lParam = 0;
+    int result = PumpUntilMessage(MSG_END_MODAL, nullptr, &lParam);
+    if (lParam != 0)
+    {
+        if (lParam == QUIT_NO_PROMPT)
+            result = defaultAnswer;
+        else
+            result = static_cast<int>(lParam);
+    }
+
+    humanView->RemoveElement(modalScreen);
+    _hasModalDialog >>= 1;
+    
+    return result;
+}
+
 const std::wstring EngineApp::GetSaveGameDirectory(HWND hWnd, const TCHAR* gameAppDirectory)
 {
     static TCHAR saveGameDirectory[MAX_PATH];
@@ -244,6 +327,10 @@ const std::wstring EngineApp::GetSaveGameDirectory(HWND hWnd, const TCHAR* gameA
     _tcscat_s(saveGameDirectory, TEXT("\\"));
 
     return saveGameDirectory;
+}
+
+int EngineApp::PumpUntilMessage(UINT msgEnd, WPARAM* pWParam, LPARAM* pLParam)
+{
 }
 
 

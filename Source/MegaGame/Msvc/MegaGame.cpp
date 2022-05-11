@@ -25,7 +25,8 @@ BaseGameLogic* MegaGameApp::CreateGame()
 
 	BaseGameLogic* game = _NEW MegaGameLogic();
 	game->Init();
-	
+
+	Color color;
 	std::shared_ptr<IGameView> view(_NEW MegaGameHumanView());
 	game->AddGameView(view);
 	return game;

@@ -30,6 +30,9 @@
     <Filter Include="Actors\Components">
       <UniqueIdentifier>{37e43d14-7b7d-49dd-a873-387a1407743a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{43c7b8a6-6749-4e50-a550-3cb62300ccb6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -91,6 +94,12 @@
     <ClInclude Include="..\Utilities\Math.inl">
       <Filter>Utilities</Filter>
     </ClInclude>
+    <ClInclude Include="..\ResourceCache\XmlResourceLoader.h">
+      <Filter>ResourceCache</Filter>
+    </ClInclude>
+    <ClInclude Include="..\UI\HumanView.h">
+      <Filter>UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Core\EngineApp.cpp">
@@ -136,6 +145,9 @@
       <Filter>ResourceCache</Filter>
     </ClCompile>
     <ClCompile Include="MegaGameStd.cpp" />
+    <ClCompile Include="..\ResourceCache\XmlResourceLoader.cpp">
+      <Filter>ResourceCache</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MegaEngine_2022.rc">
