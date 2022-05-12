@@ -3,7 +3,15 @@
 
 #include "MegaGameView.h"
 
-void MegaGameHumanView::OnRender(float time, float elapsedTime)
+#include "MegaGame/Views/MainMenuUi.h"
+
+MegaGameHumanView::MegaGameHumanView() : HumanView()
 {
-    std::cout << "Render" << std::endl;
+    _runFullSpeed = true;
+    _mainMenuUi = std::make_shared<MainMenuUi>();
+    PushElement(_mainMenuUi);
+}
+
+MegaGameHumanView::~MegaGameHumanView()
+{
 }

@@ -1,9 +1,11 @@
+#include "MegaEngineStd.h"
 #include "MessageBox.h"
 #include "d3d9.h"
+#include "Graphics/D3D11/Directx11Renderer.h"
 
-UiMessageMox::UiMessageMox(std::wstring message, std::wstring title, int buttonFlags)
+UiMessageMox::UiMessageMox(std::wstring message, std::wstring title, IRenderer* renderer, int buttonFlags)
 {
-    _ui.Init(&g_DialogResourceManager);
+    _ui.Init(&DirectX11Renderer::g_DialogResourceManager);
     _ui.SetCallback(OnGuiEvent);
 
     RECT rc;
@@ -107,4 +109,5 @@ void UiMessageMox::OnGuiEvent(UINT event, int controlId, CDXUTControl* control, 
 
 int UiMessageMox::Ask(MessageBoxQuestions question)
 {
+    return 0;
 }

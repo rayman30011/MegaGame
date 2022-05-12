@@ -7,8 +7,9 @@
 
 constexpr uint32_t SCREEN_REFRESH_RATE = 1000 / 60;
 
-HumanView::HumanView(Color backgroundColor)
+HumanView::HumanView()
 {
+    
 }
 
 HumanView::~HumanView()
@@ -25,7 +26,7 @@ HRESULT HumanView::OnRestore()
     return S_OK;
 }
 
-HRESULT HumanView::OnRender(float time, float elapsedTime)
+void HumanView::OnRender(float time, float elapsedTime)
 {
     _currTick = timeGetTime();
     if (_currTick == _lastDraw)
@@ -66,6 +67,7 @@ HRESULT HumanView::OnLostDevice()
 
 bool HumanView::LoadGame(xml::XMLElement* levelData)
 {
+    return true;
 }
 
 LRESULT CALLBACK HumanView::OnMsgProc(AppMsg msg)
@@ -118,6 +120,7 @@ void HumanView::OnUpdate(int deltaMilliseconds)
 
 void HumanView::PushElement(shared_ptr<IScreenElement> element)
 {
+    ScreenElements.push_back(element);
 }
 
 void HumanView::RemoveElement(shared_ptr<IScreenElement> element)
@@ -130,6 +133,7 @@ void HumanView::TogglePause(bool active)
 
 bool HumanView::InitAudio()
 {
+    return true;
 }
 
 void HumanView::SetCameraOffset(Vector4 offset)

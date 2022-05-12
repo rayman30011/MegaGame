@@ -28,9 +28,6 @@
 
 #include <tinyxml2.h>
 
-
-CDXUTDialogResourceManager g_DialogResourceManager;
-
 using std::shared_ptr;
 using std::weak_ptr;
 using std::string;

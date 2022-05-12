@@ -2,6 +2,7 @@
 
 #include "Directx11Renderer.h"
 
+CDXUTDialogResourceManager DirectX11Renderer::g_DialogResourceManager;
 
 DirectX11Renderer::~DirectX11Renderer()
 {
@@ -22,9 +23,10 @@ HRESULT DirectX11Renderer::OnRestore()
 
 bool DirectX11Renderer::PreRender()
 {
-	
+	return true;
 }
 
 bool DirectX11Renderer::PostRender()
 {
+	return true;
 }

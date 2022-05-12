@@ -5,6 +5,8 @@
 class DirectX11Renderer : public IRenderer
 {
 public:
+	static CDXUTDialogResourceManager g_DialogResourceManager;
+	
 	CDXUTTextHelper* TextHelper;
 
 	~DirectX11Renderer();

@@ -1,13 +1,15 @@
 #include <MegaEngineStd.h>
 
 #include "Initialization.h"
-#include "../Core/EngineApp.h"
-#include "../Graphics/D3D11/Directx11Renderer.h"
+#include "Core/EngineApp.h"
+#include "Graphics/D3D11/Directx11Renderer.h"
 #include "ResourceCache/ResourceZipFile.h"
 #include "ResourceCache/ResCache.h"
 #include "ResourceCache/XmlResourceLoader.h"
 #include "UI/HumanView.h"
 #include "UI/UserInterface.h"
+
+#include "timeapi.h"
 
 using namespace MegaEngine::Core;
 
@@ -92,16 +94,23 @@ bool EngineApp::IsD3D11DeviceAcceptable(const CD3D11EnumAdapterInfo* AdapterInfo
 
 HRESULT EngineApp::OnD3D11CreateDevice(ID3D11Device* pd3dDevice, const DXGI_SURFACE_DESC* pBackBufferSurfaceDesc, void* pUserContext)
 {
+    HRESULT hr;
+    ID3D11DeviceContext* pd3dImmediateContext = DXUTGetD3D11DeviceContext();
+    V_RETURN(DirectX11Renderer::g_DialogResourceManager.OnD3D11CreateDevice(pd3dDevice, pd3dImmediateContext));
     return S_OK;
 }
 
 HRESULT EngineApp::OnD3D11ResizedSwapChain(ID3D11Device* pd3dDevice, IDXGISwapChain* pSwapChain, const DXGI_SURFACE_DESC* pBackBufferSurfaceDesc, void* pUserContext)
 {
+    HRESULT hr;
+
+    V_RETURN(DirectX11Renderer::g_DialogResourceManager.OnD3D11ResizedSwapChain( pd3dDevice, pBackBufferSurfaceDesc ) );
     return S_OK;
 }
 
 void EngineApp::OnD3D11ReleasingSwapChain(void* pUserContext)
 {
+    DirectX11Renderer::g_DialogResourceManager.OnD3D11ReleasingSwapChain();
 }
 
 void EngineApp::OnD3D11DestroyDevice(void* pUserContext)
@@ -260,7 +269,7 @@ int EngineApp::Modal(shared_ptr<IScreenElement> modalScreen, int defaultAnswer)
         if (view->GetType() == GameViewType::Human)
         {
             const auto gameView = view;
-            humanView = static_cast<HumanView*>(&*gameView);
+            humanView = std::static_pointer_cast<HumanView>(gameView).get();
             break;
         }
     }
@@ -329,8 +338,53 @@ const std::wstring EngineApp::GetSaveGameDirectory(HWND hWnd, const TCHAR* gameA
     return saveGameDirectory;
 }
 
-int EngineApp::PumpUntilMessage(UINT msgEnd, WPARAM* pWParam, LPARAM* pLParam)
+int EngineApp::PumpUntilMessage(UINT msgEnd, WPARAM* wParam, LPARAM* lParam)
 {
+    int currentTime = timeGetTime();
+    MSG msg;
+    for (;;)
+    {
+        if (PeekMessage(&msg, nullptr, 0, 0, PM_NOREMOVE))
+        {
+            if (PeekMessage(&msg, nullptr, 0, 0, 0))
+            {
+                if (msg.message != WM_SYSCOMMAND || msg.wParam != SC_CLOSE)
+                {
+                    TranslateMessage(&msg);
+                    DispatchMessage(&msg);
+                }
+
+                if (!IsIconic(GetHWnd()))
+                {
+                    FlashWindow(GetHWnd(), false);
+                    break;
+                }
+            }
+        }
+        else
+        {
+            if (_game)
+            {
+                const int timeNow = timeGetTime();
+                const int deltaMillisecond = timeNow - currentTime;
+
+                for (const auto& view : _game->GetViews())
+                {
+                    view->OnUpdate(deltaMillisecond);
+                }
+
+                currentTime = timeNow;
+                DXUTRender3DEnvironment();
+            }
+        }
+
+        if (lParam)
+            *lParam = msg.lParam;
+        if (wParam)
+            *wParam = msg.lParam;
+
+        return 0;
+    }
 }
 
 

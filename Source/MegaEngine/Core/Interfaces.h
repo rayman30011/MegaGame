@@ -44,7 +44,7 @@ class IGameView
 {
 public:
     virtual ~IGameView() = default;
-    virtual HRESULT OnRender(float time, float elapsedTime) = 0;
+    virtual void OnRender(float time, float elapsedTime) = 0;
     virtual HRESULT OnRestore() = 0;
     virtual HRESULT OnLostDevice() = 0;
     virtual GameViewType GetType() = 0;

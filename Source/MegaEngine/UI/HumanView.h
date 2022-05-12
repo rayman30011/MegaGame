@@ -3,16 +3,16 @@
 
 using namespace DirectX::Math;
 
-class HumanView : IGameView
+class HumanView : public IGameView
 {
 public:
-    explicit HumanView(Color backgroundColor);
+    explicit HumanView();
     ~HumanView() override;
 
     std::list<shared_ptr<IScreenElement>> ScreenElements;
     
     HRESULT OnRestore() override;
-    HRESULT OnRender(float time, float elapsedTime) override;
+    void OnRender(float time, float elapsedTime) override;
     HRESULT OnLostDevice() override;
     GameViewType GetType() override { return GameViewType::Human; }
     GameViewId GetId() override { return _gameViewId; }
