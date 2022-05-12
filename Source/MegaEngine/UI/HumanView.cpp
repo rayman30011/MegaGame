@@ -84,30 +84,30 @@ LRESULT CALLBACK HumanView::OnMsgProc(AppMsg msg)
         
     }
 
-    LRESULT result = 0;
-    switch (msg.UMsg)
-    {
-    case WM_KEYDOWN:
-        if (_keyboardHandler)
-        {
-            result = _keyboardHandler->OnKeyDown(msg.WParam) ? 1 : 0;
-        }
-        break;
-    case WM_KEYUP:
-        if (_keyboardHandler)
-        {
-            result = _keyboardHandler->OnKeyUp(msg.WParam) ? 1 : 0;
-        }
-        break;
-    case WM_MOUSEMOVE:
-        if (_pointerHandler)
-        {
-            result = _pointerHandler->OnPointerMove(Vector2(LOWORD(msg.LParam), HIWORD(msg.LParam))) ? 1 : 0;
-        }
-        break;
-    default:
-        return 0;
-    }
+    // LRESULT result = 0;
+    // switch (msg.UMsg)
+    // {
+    // case WM_KEYDOWN:
+    //     if (_keyboardHandler)
+    //     {
+    //         result = _keyboardHandler->OnKeyDown(msg.WParam) ? 1 : 0;
+    //     }
+    //     break;
+    // case WM_KEYUP:
+    //     if (_keyboardHandler)
+    //     {
+    //         result = _keyboardHandler->OnKeyUp(msg.WParam) ? 1 : 0;
+    //     }
+    //     break;
+    // case WM_MOUSEMOVE:
+    //     if (_pointerHandler)
+    //     {
+    //         result = _pointerHandler->OnPointerMove(Vector2(LOWORD(msg.LParam), HIWORD(msg.LParam))) ? 1 : 0;
+    //     }
+    //     break;
+    // default:
+    //     return 0;
+    //}
 }
 
 void HumanView::OnUpdate(int deltaMilliseconds)

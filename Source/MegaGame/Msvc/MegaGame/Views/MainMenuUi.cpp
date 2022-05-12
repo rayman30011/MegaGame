@@ -38,7 +38,7 @@ HRESULT MainMenuUi::OnLostDevice()
 
 LRESULT MainMenuUi::OnMsgProc(AppMsg msg)
 {
-    return S_OK;
+    return _ui.MsgProc(msg.HWnd, msg.UMsg, msg.WParam, msg.LParam);
 }
 
 HRESULT MainMenuUi::OnRender(double fTime, float fElapsedTime)
@@ -49,4 +49,5 @@ HRESULT MainMenuUi::OnRender(double fTime, float fElapsedTime)
 
 void MainMenuUi::OnGuiEvent(UINT event, int controlId, CDXUTControl* control, void* userContext)
 {
+    int a = 5;
 }

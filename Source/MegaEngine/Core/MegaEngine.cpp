@@ -23,6 +23,8 @@ INT WINAPI MegaEngineMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR c
     SetStdHandle(STD_OUTPUT_HANDLE, hConsoleSTDOUT);
 #endif // _DEBUG
 
+    DXUTSetCallbackMsgProc(EngineApp::MsgProc);
+
     DXUTSetCallbackD3D11DeviceAcceptable(EngineApp::IsD3D11DeviceAcceptable);
     DXUTSetCallbackD3D11DeviceCreated(EngineApp::OnD3D11CreateDevice);
     DXUTSetCallbackD3D11SwapChainResized(EngineApp::OnD3D11ResizedSwapChain);
@@ -39,6 +41,7 @@ INT WINAPI MegaEngineMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR c
     }
 
     DXUTMainLoop();
+    DXUTShutdown();
 
     return GApp->GetExitCode();
 }

@@ -19,5 +19,5 @@ bool SampleComponent::Init(const xml::XMLElement* el)
 
 void SampleComponent::Update(int delta)
 {
-    std::cout << "[SampleComponent]: " + _title << std::endl;
+    //std::cout << "[SampleComponent]: " + _title << std::endl;
 }

@@ -76,7 +76,7 @@ bool EngineApp::InitInstance(HINSTANCE hInstance, LPWSTR cmdLine, HWND hWnd, int
     DXUTCreateDevice(D3D_FEATURE_LEVEL_10_0, true, screenWidth, screenHeight);
 
     _renderer = std::make_shared<DirectX11Renderer>();
-    _renderer->SetBackgroundColor(255, 20, 20, 200);
+    _renderer->SetBackgroundColor(183, 237, 235, 255);
     _renderer->OnRestore();
 
     _game = CreateGame();
@@ -145,8 +145,12 @@ void EngineApp::OnUpdate(double fTime, float fElapsedTime, void* pUserContext)
     
 }
 
-LRESULT EngineApp::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK EngineApp::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam, bool* pbNoFurtherProcessing, void* pUserContext)
 {
+    *pbNoFurtherProcessing = DirectX11Renderer::g_DialogResourceManager.MsgProc( hWnd, uMsg, wParam, lParam );
+    if( *pbNoFurtherProcessing )
+        return 0;
+    
     LRESULT result = 0;
 
     switch (uMsg)
@@ -175,10 +179,14 @@ LRESULT EngineApp::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             msg.LParam = lParam;
             msg.WParam = wParam;
 
-            for (const auto& view : _game->_gameViews)
+            auto game = GApp->_game;
+            for (auto view : game->GetViews())
             {
                 if (view->OnMsgProc(msg))
-                    return true;
+                {
+                    result = true;
+                    break;
+                }
             }
         }
         break;

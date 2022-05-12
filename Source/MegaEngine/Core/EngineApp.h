@@ -34,7 +34,7 @@ public:
 	bool HasModalDialog();
 	static void CALLBACK OnUpdate(double fTime, float fElapsedTime, void* pUserContext);
 
-	LRESULT MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	static LRESULT CALLBACK MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam, bool* pbNoFurtherProcessing, void* pUserContext);
 
 	std::wstring GetString(const std::wstring id);
 	bool LoadStrings(const std::string& language);

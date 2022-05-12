@@ -11,7 +11,10 @@ DirectX11Renderer::~DirectX11Renderer()
 
 void DirectX11Renderer::SetBackgroundColor(int r, int g, int b, int a)
 {
-	
+	_bgColor[0] = float(a) / 255.0f;
+	_bgColor[1] = float(r) / 255.0f;
+	_bgColor[2] = float(g) / 255.0f;
+	_bgColor[3] = float(b) / 255.0f;
 }
 
 HRESULT DirectX11Renderer::OnRestore()
@@ -23,6 +26,11 @@ HRESULT DirectX11Renderer::OnRestore()
 
 bool DirectX11Renderer::PreRender()
 {
+	if (DXUTGetD3D11DeviceContext() && DXUTGetD3D11RenderTargetView())
+	{
+		DXUTGetD3D11DeviceContext()->ClearRenderTargetView( DXUTGetD3D11RenderTargetView(), _bgColor);
+		DXUTGetD3D11DeviceContext()->ClearDepthStencilView( DXUTGetD3D11DepthStencilView(), D3D11_CLEAR_DEPTH, 1.0f, 0 );
+	}
 	return true;
 }
 
