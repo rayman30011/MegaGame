@@ -74,7 +74,7 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(ProjectDir)..\..\Lib\$(PlatformName)$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
-    <IncludePath>$(ProjectDir)..;$(ProjectDir)..\ThirdParty\DXUT\Core;$(ProjectDir)..\ThirdParty\tinyxml2;$(ProjectDir);$(ProjectDir)..\ThirdParty\DXUT\Optional;$(ProjectDir)..\ThirdParty\zlib;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..;$(ProjectDir)..\ThirdParty\DXUT\Core;$(ProjectDir)..\ThirdParty\tinyxml2;$(ProjectDir);$(ProjectDir)..\ThirdParty\DXUT\Optional;$(ProjectDir)..\ThirdParty\zlib;$(ProjectDir)..\ThirdParty\DirectXTK\Inc;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -159,16 +159,26 @@
     <ClInclude Include="..\Core\EngineApp.h" />
     <ClInclude Include="..\Core\Initialization.h" />
     <ClInclude Include="..\Core\Interfaces.h" />
+    <ClInclude Include="..\EventManager\EventManagerImp.h" />
+    <ClInclude Include="..\EventManager\Events.h" />
+    <ClInclude Include="..\EventManager\IEventManager.h" />
+    <ClInclude Include="..\Graphics\D3D11\Common.h" />
     <ClInclude Include="..\Graphics\D3D11\Directx11Renderer.h" />
+    <ClInclude Include="..\Graphics\D3D11\Material.h" />
     <ClInclude Include="..\Graphics\Interfaces.h" />
+    <ClCompile Include="..\EventManager\Event.cpp" />
+    <ClCompile Include="..\EventManager\EventManagerImp.cpp" />
+    <ClCompile Include="..\EventManager\IEventManager.cpp" />
+    <ClCompile Include="..\Graphics\D3D11\Common.cpp" />
+    <ClCompile Include="..\Graphics\D3D11\Shaders.cpp" />
+    <ClCompile Include="..\Graphics\D3D11\Material.cpp" />
     <ClCompile Include="..\ResourceCache\ResCache.cpp" />
+    <ClInclude Include="..\ResourceCache\TextureResourceLoader.h" />
     <ClInclude Include="..\ResourceCache\XmlResourceLoader.h" />
     <ClInclude Include="..\ResourceCache\ZipFile.h" />
     <ClInclude Include="..\UI\HumanView.h" />
     <ClInclude Include="..\UI\MessageBox.h" />
     <ClInclude Include="..\UI\UserInterface.h" />
-    <ClInclude Include="..\Utilities\Math.h" />
-    <ClInclude Include="..\Utilities\Math.inl" />
     <ClInclude Include="..\Utilities\Strings.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="MegaEngineStd.h" />
@@ -187,10 +197,10 @@
     <ClCompile Include="..\Core\Initialization.cpp" />
     <ClCompile Include="..\Graphics\D3D11\Directx11Renderer.cpp" />
     <ClCompile Include="..\ResourceCache\ResourceZipFile.cpp" />
+    <ClCompile Include="..\ResourceCache\TextureResourceLoader.cpp" />
     <ClCompile Include="..\ResourceCache\ZipFile.cpp" />
     <ClCompile Include="..\UI\HumanView.cpp" />
     <ClCompile Include="..\UI\MessageBox.cpp" />
-    <ClCompile Include="..\Utilities\Math.cpp" />
     <ClCompile Include="..\Utilities\Strings.cpp" />
     <ClCompile Include="MegaGameStd.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -214,7 +224,7 @@
     <ClCompile Include="..\ResourceCache\XmlResourceLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Update="..\ResourceCache" />
+    <ClInclude Include="..\Graphics\D3D11\Shaders.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

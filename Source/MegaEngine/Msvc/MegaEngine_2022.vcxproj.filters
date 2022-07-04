@@ -33,6 +33,9 @@
     <Filter Include="UI">
       <UniqueIdentifier>{43c7b8a6-6749-4e50-a550-3cb62300ccb6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EventManager">
+      <UniqueIdentifier>{869ccdb3-760c-46ad-afed-d9fbce5f1725}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -100,6 +103,15 @@
     <ClInclude Include="..\UI\HumanView.h">
       <Filter>UI</Filter>
     </ClInclude>
+    <ClInclude Include="..\UI\MessageBox.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\UI\UserInterface.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\EventManager\Events.h">
+      <Filter>EventManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Core\EngineApp.cpp">
@@ -147,6 +159,12 @@
     <ClCompile Include="MegaGameStd.cpp" />
     <ClCompile Include="..\ResourceCache\XmlResourceLoader.cpp">
       <Filter>ResourceCache</Filter>
+    </ClCompile>
+    <ClCompile Include="..\UI\HumanView.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\UI\MessageBox.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

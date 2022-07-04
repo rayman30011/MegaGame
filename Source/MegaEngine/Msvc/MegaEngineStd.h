@@ -27,6 +27,7 @@
 #include <DXUTgui.h>
 
 #include <tinyxml2.h>
+#include <SimpleMath.h>
 
 using std::shared_ptr;
 using std::weak_ptr;

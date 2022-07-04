@@ -74,7 +74,7 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)..\..\Lib\$(PlatformName)$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
-    <IncludePath>$(ProjectDir)..;$(ProjectDir);$(ProjectDir)..\..\MegaEngine\ThirdParty\DXUT\Core;$(ProjectDir)..\..\MegaEngine\ThirdParty\DXUT\Optional;$(ProjectDir)..\..\MegaEngine\ThirdParty\tinyxml2;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..;$(ProjectDir);$(ProjectDir)..\..\MegaEngine\ThirdParty\DXUT\Core;$(ProjectDir)..\..\MegaEngine\ThirdParty\DXUT\Optional;$(ProjectDir)..\..\MegaEngine\ThirdParty\tinyxml2;$(ProjectDir)..\..\MegaEngine\ThirdParty\DirectXTK\Inc;$(IncludePath)</IncludePath>
     <LibraryPath>$(DXSDK_DIR)Lib\x86;$(VCInstallDir)PlatformSDK\lib;$(LibraryPath);$(SolutionDir)..\..\Lib\$(PlatformName)$(Configuration);$(SolutionDir)..\..\Lib\</LibraryPath>
     <TargetName>$(ProjectName)$(PlatformName)$(Configuration)</TargetName>
   </PropertyGroup>

@@ -28,7 +28,7 @@ bool DirectX11Renderer::PreRender()
 {
 	if (DXUTGetD3D11DeviceContext() && DXUTGetD3D11RenderTargetView())
 	{
-		DXUTGetD3D11DeviceContext()->ClearRenderTargetView( DXUTGetD3D11RenderTargetView(), _bgColor);
+		DXUTGetD3D11DeviceContext()->ClearRenderTargetView( DXUTGetD3D11RenderTargetView(), DirectX::Colors::LightBlue);
 		DXUTGetD3D11DeviceContext()->ClearDepthStencilView( DXUTGetD3D11DepthStencilView(), D3D11_CLEAR_DEPTH, 1.0f, 0 );
 	}
 	return true;
